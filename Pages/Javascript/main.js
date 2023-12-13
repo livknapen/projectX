@@ -8,7 +8,7 @@
  // sets renderer background color
  renderer.setClearColor(0xEEEEEE)
  document.body.appendChild( renderer.domElement )
- camera.position.z = 5
+ camera.position.z = 7
  
  // resize canvas on resize window
  window.addEventListener( 'resize', () => {
@@ -26,7 +26,7 @@
  scene.add( cube )
  
  // wireframe cube
- var geometry = new THREE.BoxGeometry( 3, 3, 3)
+ var geometry = new THREE.BoxGeometry( 5, 5, 5)
  var material = new THREE.MeshBasicMaterial( {
    color: 0x0000FF, wireframe: true, transparent: true
  })
@@ -34,7 +34,7 @@
  scene.add( wireframeCube )
  
  // ambient light
- var ambientLight = new THREE.AmbientLight ( 0xffffff, 0.2)
+ var ambientLight = new THREE.AmbientLight ( 0xffffff, 0.4)
  scene.add( ambientLight )
  
  // point light
