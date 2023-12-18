@@ -17,14 +17,14 @@ document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 1, 1000);
-camera.position.set(0, 0, 0);
+const camera = new THREE.PerspectiveCamera(12, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.set(0, 0, 8);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.enablePan = false;
-controls.minDistance = 10;
-controls.maxDistance = 40;
+controls.minDistance = 1;
+controls.maxDistance = 30;
 controls.minPolarAngle = 0.5;
 controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
@@ -43,7 +43,7 @@ groundMesh.receiveShadow = true;
 scene.add(groundMesh);
 
 const spotLight = new THREE.SpotLight(0xffffff,  3, 100, 0.22, 1);
-spotLight.position.set(1, 25, 7);
+spotLight.position.set(1, 25, 15);
 spotLight.castShadow = true;
 spotLight.shadow.bias = -0.0001;
 scene.add(spotLight);
@@ -54,7 +54,7 @@ loader.load('scene.gltf', (gltf) => {
 
   mesh.traverse((child) => {
     if (child.isMesh) {
-      child.castShadow = true
+      child.castShadow = true;
       child.receiveShadow = true;
     }
   });
@@ -74,9 +74,9 @@ window.addEventListener('resize', () => {
 });
 
 function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
-
-animate();
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  
+  animate();
