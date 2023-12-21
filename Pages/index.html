@@ -3,16 +3,29 @@
 	<head>
 		<meta charset=utf-8>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<title>Three.js</title>
+		<title>arcade</title>
 		<style>
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
 		</style>
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+          {
+            "imports": {
+              "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
+              "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/"
+            }
+          }
+        </script>
 	</head>
 	<body>
-    <!-- CDN Link to Three.js -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
-		<!--reference your JS file here. Mine looks like below-->
-    <script src="Javascript/main.js"></script>
+        <div id="heading">
+            <div class="border"></div>
+          </div>
+          <div id="progress-container">
+            <div id="progress">LOADING 0/100</div>
+          </div>
+    	<script type="module" src="./Javascript/main.js"></script>
+        
 	</body>
 </html>
