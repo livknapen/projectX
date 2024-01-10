@@ -5,11 +5,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x85bcc9);
 renderer.setPixelRatio(window.devicePixelRatio);
-
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -48,24 +46,48 @@ spotLight.castShadow = true;
 spotLight.shadow.bias = -0.0001;
 scene.add(spotLight);
 
-const loader = new GLTFLoader().setPath('/node_modules/arcade_game_-_space_invaders/');
-loader.load('scene.gltf', (gltf) => {
-  const mesh = gltf.scene;
+// Load first 3D model
+let gltf1;
+const loader1 = new GLTFLoader().setPath('/node_modules/arcade_game_-_space_invaders/');
+loader1.load('scene.gltf', (loadedGltf) => {
+  gltf1 = loadedGltf.scene;
 
-  mesh.traverse((child) => {
+  gltf1.traverse((child) => {
     if (child.isMesh) {
       child.castShadow = true;
       child.receiveShadow = true;
     }
   });
 
-  mesh.position.set(0.3, 0, 2.5);
-  scene.add(mesh);
+  gltf1.position.set(0.3, 0, 2.5);
+  scene.add(gltf1);
+});
 
-  document.getElementById('progress-container').style.display = 'none';
-}, ( xhr ) => {
-  document.getElementById('progress').innerHTML = `LOADING ${Math.max(xhr.loaded / xhr.total, 1) * 100}/100`;
-},);
+// Load second 3D model
+let gltf2;
+const loader2 = new GLTFLoader().setPath('/node_modules/ryu/');
+loader2.load('scene.gltf', (loadedGltf) => {
+  gltf2 = loadedGltf.scene;
+
+  gltf2.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  gltf2.scale.set(2, 2, 2);
+  gltf2.position.set(0, 0, 0);
+  scene.add(gltf2);
+
+  // Set initial camera position and look-at for the second model
+  camera.position.set(0, 0, 20);
+  controls.target = gltf2.position;
+  camera.lookAt(gltf2.position);
+
+  // Set light targets to follow the second model
+  spotLight.target = gltf2;
+});
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -73,10 +95,46 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+// Handle keyboard input
+const keyboardState = {};
+document.addEventListener('keydown', (event) => {
+  keyboardState[event.code] = true;
+});
+
+document.addEventListener('keyup', (event) => {
+  keyboardState[event.code] = false;
+});
+
+// Animation loop
 function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+
+  // Update object and camera positions based on keyboard input
+  const speed = 0.05;
+
+  if (gltf2) {
+    if (keyboardState['KeyW']) gltf2.position.z -= speed;
+    if (keyboardState['KeyA']) gltf2.position.x -= speed;
+    if (keyboardState['KeyS']) gltf2.position.z += speed;
+    if (keyboardState['KeyD']) gltf2.position.x += speed;
+
+    controls.target = gltf2.position;
+
+    // Update light positions to follow the second model
+    spotLight1.position.copy(gltf2.position).add(new THREE.Vector3(1, 20, 10));
   }
-  
-  animate();
+
+  if (keyboardState['KeyW']) camera.position.z -= speed;
+  if (keyboardState['KeyA']) camera.position.x -= speed;
+  if (keyboardState['KeyS']) camera.position.z += speed;
+  if (keyboardState['KeyD']) camera.position.x += speed;
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+document.onkeydown = function (e) {
+  console.log(e);
+};
