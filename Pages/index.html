@@ -14,7 +14,14 @@
 				height: 100%;
 			}
 			h1 {
-				size: 10px;
+				size: 100px;
+				color: white;
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				z-index: 100;
+				text-align: center;
+				display: block;
 			}
 		</style>
 
@@ -33,13 +40,10 @@
 	</head>
 	<body>
         <div id="heading">
-            <div class="border">
 				<h1>Use 'WASD' to move Ryu</h1>
-			</div>
-          </div>
+		</div>
           
 		  <div id="scene-container">
-			<!-- Our <canvas> will be inserted here -->
 		  </div>
     	<script type="module" src="./Javascript/main.js"></script>
 		
