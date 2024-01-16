@@ -39,7 +39,7 @@ renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 container.append(renderer.domElement);
 
-// Create a cube
+// Create a cube for scene
 const geometry = new BoxGeometry(0.5, 0.4, 0.01);
 const textureLoader = new TextureLoader();
 const cubeTexture = textureLoader.load('/Media/backgroundscene.jpeg', () => {
@@ -68,6 +68,21 @@ const cubeMaterial2 = new MeshBasicMaterial({
 const cube2 = new Mesh(geometry2, cubeMaterial2);
 cube2.position.set(0, 0, -20);
 scene2.add(cube2);
+
+// Create a cube for scene loadingscene
+// const geometry3 = new BoxGeometry(3, 3, 0);
+// const textureLoader3 = new TextureLoader();
+// const cubeTexture3 = textureLoader3.load('/Media/streetfighter2.png', () => {
+//   renderer.render(scene, camera);
+// });
+
+// const cubeMaterial3 = new MeshBasicMaterial({
+//   map: cubeTexture3,
+// });
+
+// const cube3 = new Mesh(geometry3, cubeMaterial3);
+// cube3.position.set(0, 1, 5);
+// scene.add(cube3);
 
 // Set up the ground for scene
 const groundGeometry = new THREE.PlaneGeometry(15, 15, 15, 15);
@@ -242,7 +257,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   // Update object and camera positions based on keyboard input
-  const speed = 0.03;
+  const speed = 0.05;
 
   if (currentScene === scene) {
   if (gltf2) {
