@@ -14,9 +14,16 @@
 				height: 100%;
 			}
 
-      h1 {
-        size: 10px;
-      }
+			h1 {
+				size: 100px;
+				color: white;
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				z-index: 100;
+				text-align: center;
+				display: block;
+			}
 		</style>
 
 		<script src="https://unpkg.com/gsap@3.9.1/dist/gsap.min.js"></script>
@@ -32,13 +39,11 @@
 	</head>
 
 	<body>
-        <div id="heading">
-            <div class="border">
-				<h1>Use 'WASD' to move Ryu</h1>
-			</div>
-          </div>
+    <div class="heading">
+      <h1>Use 'WASD' to move Ryu</h1>
+  </div>
           
-		  <div id="scene-container">
+		  <div class="scene-container">
 			<!-- Our <canvas> will be inserted here -->
 		  </div>
     	<script type="module" src="./Javascript/main.js"></script>

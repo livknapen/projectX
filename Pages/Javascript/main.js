@@ -226,7 +226,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   // Update object and camera positions based on keyboard input
-  const speed = 0.03;
+  const speed = 0.05;
 
   if (currentScene === scene) {
   if (gltf2) {
