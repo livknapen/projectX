@@ -2,7 +2,7 @@
 
 This is a flat and responsive website designed and coded by Liv Knapen. When you load this website, you will spawn with a character named Ryu in this scene. You will see an arcade with the screen from the streetfighter game. You can move with your keyboard, the character while the camera and spotlight will follow you. When you will reach the correct (X,Y,Z), which is inside the arcade, you will teleport to a new scene where you spawn again as Ryu but than 'in' the game. Here you can only move to left and right, just as the game. The camera will stay centered. After reloading the page you will come back in the first scene.
 
-![Demo Image](https://git.fhict.nl/I505851/porftolioliv/-/raw/main/media/imgportfolio.png)
+![Demo Image](https://git.fhict.nl/I505851/projectx/-/raw/main/Media/projectximg.png)
 
 
 ## Contents
